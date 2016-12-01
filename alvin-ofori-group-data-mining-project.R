@@ -23,3 +23,25 @@ setup_twitter_oauth("ggjifKDv72hsVfTZY63scjVrp",
                     )
 
 kalyppo.tweets = searchTwitter("kalyppo", 1000, since="2016-10-01")
+
+#fetch tweets representing ndc, npp, and maybe ppp, for training your model
+npp.tweets = searchTwitter("@NAkufoAddo", 1000)
+ndc.tweets = searchTwitter("@JDMahama", 1000)
+ppp.tweets = searchTwitter("@pknduom", 1000)
+
+
+npp.df <- twListToDF(npp.tweets)
+ndc.df <- twListToDF(ndc.tweets)
+ppp.df <- twListToDF(ppp.tweets)
+#creating model
+#get rid of emoticons
+npp.$text <- sapply(npp.df$text,function(row) iconv(row, "latin1","ASCII",sub=""))
+ndc.df$text <- sapply(ndc.df$text,function(row) iconv(row, "latin1","ASCII",sub=""))
+
+
+npp.tweets = VCorpus(DataframeSource(npp.tweets))
+
+
+#then, feed the kalyppo tweets into the model, so it does the separation for you
+#then you can know which share of the tweets was owned by which political party.
+
