@@ -1,3 +1,8 @@
+#author: Ayishetu Seidu
+# 74672017
+#analysis of the dynamics of #kalyppochallenge trend on twitter
+# compating #kalyppochallenge trend with ndc's #JMToaso
+# and npp's #changeiscoming to see if kalyppo beat them
 
 setwd("C:/Users/admin/Google Drive/ACADEMICS/4th Year 1st/Data Mining/Group Work")
 #loading required libraries.
