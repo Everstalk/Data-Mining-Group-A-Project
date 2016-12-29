@@ -1,0 +1,44 @@
+#author: Ayishetu Seidu
+# 74672017
+#analysis of the dynamics of #kalyppochallenge trend on twitter
+# compating #kalyppochallenge trend with ndc's #JMToaso
+# and npp's #changeiscoming to see if kalyppo beat them
+
+setwd("C:/Users/admin/Google Drive/ACADEMICS/4th Year 1st/Data Mining/Group Work")
+#loading required libraries.
+library(NLP)
+library(tm) #for text mining
+library(httr) #for http integration with R
+library(twitteR) #for working with twitter.
+
+#checking OAUTH endpoints for twitter
+oauth_endpoints("twitter")
+
+Sys.setenv(TZ="GMT")  #setting time zone
+
+#getting twitter verification details
+apiKey<-"2MZSE1owp4txTqaafY7RqAven"
+apiSecret<-"lK5AM3PxkKi68giIx4IMyPT714LY06kLrKGWvCeR8eMiuT4IOw"
+accessToken<-"4884438578-1WWR6JpPWTK0RaAJEx4nhNDSqxHq1K0T1InZzLz"
+accessSecret<-"u1qqlfaFEyBv31gup5LaxoKdhtsvG6Bcxz0KVOmmA6Lpc"
+
+#setting up authentication
+setup_twitter_oauth(apiKey, apiSecret, accessToken, accessSecret)
+
+#searching twitter for the hashtags
+kalyppo.tweets = searchTwitter("kalyppo",1000,since="2016-10-01")
+kalypo.tweets = searchTwitter("kalypo", 1000,since="2016-10-01")
+npp.tweets = searchTwitter("changeiscoming", 3000, since =  "2016-10-01")
+ndc.tweets = searchTwitter("JMToaso", 3000, since = "2016-10-01")
+
+#converting the results to a dataframe
+kalyppo.tweets.df<-twListToDF(kalyppo.tweets)
+kalypo.tweets.df<-twListToDF(kalypo.tweets)
+npp.tweets.df <- twListToDF(npp.tweets)
+ndc.tweets.df <- twListToDF(ndc.tweets)
+
+#converting the data frame to csv files
+write.csv(kalyppo.tweets.df, file = "kalyppo.csv")
+write.csv(kalypo.tweets.df, file = "kalypo.csv")
+write.csv(npp.tweets.df, file = "npp.csv")
+write.csv(ndc.tweets.df, file = "ndc.csv")
